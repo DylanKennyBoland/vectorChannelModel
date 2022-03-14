@@ -12,6 +12,7 @@
 % whether the SER or BER curves get plotted:
 plotSERcurves = true; 
 plotBERcurve = true;
+plotSimulatedSERonly = false;
 
 % The boolean variable below is set to "true" if the user
 % wishes to simulate the bit-to-symbol mapping stage. Setting the
@@ -264,10 +265,19 @@ end
 
 if (plotBERcurve && bits2symbols)
     figure(2)
-    semilogy(10*log10(EbNo), BER, '*', 'MarkerSize', 10, 'MarkerFaceColor', [0.2 0.2 0.7], 'LineStyle', '--', 'color', 'b')
+    semilogy(10*log10(EbNo), BER, 'o', 'MarkerSize', 10, 'MarkerFaceColor', '#08ABF4', 'LineStyle', '--', 'color', '#08ABF4')
     title("\fontsize{14}\fontname{Georgia}Bit Error Rate (BER) Vs E_{b}/N_{0} (M = " + M + ", No. bits transmitted = " + numBits + ")");
     xlabel('\fontname{Georgia}\bf E_{b}/N_{0} (dB)');
     ylabel('\fontname{Georgia}\bf BER');
     set(gca,'Fontname', 'Georgia');
     legend("\fontsize{14}\fontname{Georgia}\bfSimulated BER")
+end
+
+if (plotSimulatedSERonly)
+    figure(3)
+    semilogy(10*log10(EsNo), SER, '*', 'MarkerSize', 10, 'MarkerFaceColor', [0.5 1 0.1], 'LineStyle', '--', 'color', 'g')
+    title("\fontsize{14}\fontname{Georgia}Symbol Error Rate (SER) Vs E_{s}/N_{0} (M = " + M + ", No. symbols transmitted = " + numSymbols + ")");
+    xlabel('\fontname{Georgia}\bf E_{s}/N_{0} (dB)');
+    ylabel('\fontname{Georgia}\bf SER');
+    set(gca,'Fontname', 'Georgia');
 end
